@@ -1,26 +1,26 @@
 import * as R from "ramda";
 
-const Score = R.pipe(
-    R.pluck('score'),
-    R.sum
+const Score = cities => (city) => R.pipe(
+    R.find(R.propEq('city', city)),
+    R.path('score')
+)(cities);
+
+const Distance = cities => (from, to) => R.pipe(
+    R.find(R.propEq('city', from)),
+    R.path(['distance', to])
+)(cities);
+
+const Next = cities => (city) => R.pipe(
+    R.find(R.propEq('city', city))
+)(cities);
+
+//const findDistance = Distance(citiesList);
+//const findScore = Score(citiesList);
+//const findNext = Next(citiesList);
+
+const traj = R.pipe(
+    Score
+
 );
 
-
-const dist_ = (indice) => R.pipe(
-    R.pluck('distance'),
-    R.pluck(indice),
-    R.map(R.nth,R.add(indice,1))
-);
-
-const assocCityDist_ = R.pipe(
-    R.findIndex(R.__),
-    R.map(dist_)
-);
-
-
-const assocSumDist = R.pipe(
-    R.pluck('city'),
-    R.map(assocCityDist_)
-);
-
-export{assocSumDist, Score};
+export{traj, Score};

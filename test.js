@@ -1,5 +1,5 @@
 import * as R from "ramda";
-import{assocSumDist, Score} from "./dist.js";
+import{traj, Score} from "./dist.js";
 
 const citiesList = [
     {city: 'paris', score: 2000, distance:{
@@ -48,19 +48,28 @@ const citiesList = [
 
 // faire un trajet avec le score max et compter le nombre de kilomètre
 
-const itinerary = R.applySpec({
-    scoreTotal: Score,
-    kilometer: assocSumDist
-});
+//const itinerary = R.applySpec({
+//    scoreTotal: Score,
+//    kilometer: traj
+//});
 
-const x = cities => (ville1, ville2) => R.pipe(
-    R.find(R.propEq('city', ville1)),
-    R.path(['distance', ville2])
+const findMin = R.pipe(
+    R.values,
+    R.tap(console.log),
+    R.min,
+    R.tap(console.log)
+);
+
+const Next = cities => (from) => R.pipe(
+    R.find(R.propEq('city', from)),
+    R.path(['distance']),
+    findMin,
+    R.find()
 )(cities);
 
-const findDistance = x(citiesList)
+const findNext = Next(citiesList);
 
-console.log(findDistance('paris', 'lyon'));
+console.log(findNext('paris'));
 
 //console.log(itinerary(citiesList));
 
