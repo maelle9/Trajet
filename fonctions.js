@@ -29,3 +29,20 @@ export const DistanceVilleLaPlusProche = cities => (city) => R.pipe(
     R.sort(function(a, b) { return a - b; }),
     R.head,
 )(C.citiesList);
+
+
+export const ClassementVilleParDistance = (city) => {
+    const dict = R.pipe(
+        R.find(R.propEq('city', city)),
+        R.path(['distance']),
+    )(C.citiesList);
+    var items = Object.keys(dict).map(function(key) {
+        return [key, dict[key]];
+    });
+    items.sort(function(first, second) {
+        return second[1] - first[1];
+    });
+    return items
+}
+
+
