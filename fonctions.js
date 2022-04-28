@@ -1,5 +1,6 @@
 import * as R from "ramda";
 import * as C from "./cities.js";
+import {citiesList} from "./cities.js";
 
 export const Score = cities => (city) => R.pipe(
     R.find(R.propEq('city', city)),
@@ -45,4 +46,18 @@ export const ClassementVilleParDistance = (city) => {
     return items
 }
 
+export const VilleLaPlusProche = (city) => {
+    const items = ClassementVilleParDistance(city);
+    const i = items.slice(items.length-1,items.length);
+    return i[0][0]
+}
 
+export const VilleLaPlusProche_n2 = (city) => {
+    const items = ClassementVilleParDistance(city);
+    const i = items.slice(items.length-2,items.length-1);
+    return i[0][0]
+}
+
+export const Supprimer = (city, liste) => {
+    return R.filter(c => c.city != city, liste)
+}
