@@ -1,12 +1,14 @@
 import * as R from "ramda";
 import * as C from "./cities.js";
-import {citiesList} from "./cities.js";
 
 export const Score = cities => (city) => R.pipe(
     R.find(R.propEq('city', city)),
     R.path(['score'])
 )(C.citiesList);
 
+export const test = cities => (city) => R.pipe(
+    R.findIndex(R.propEq('lyon', 2)), //=> 1
+)(C.citiesList);
 
 export const Distance = cities => (from, to) => R.pipe(
     R.find(R.propEq('city', from)),
@@ -58,6 +60,13 @@ export const VilleLaPlusProche_n2 = (city) => {
     return i[0][0]
 }
 
-export const Supprimer = (city, liste) => {
+export const Supprimer_2 = (city, liste) => {
     return R.filter(c => c.city != city, liste)
 }
+
+export const Supprimer = cities => (city) => R.pipe(
+    R.find(R.propEq('city', city)),
+    R.path(['distance']),
+    R.dropWhile('bordeaux')
+)(C.citiesList);
+
