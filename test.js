@@ -1,7 +1,9 @@
 import * as R from "ramda";
-import{findDistance} from "./dist.js";
-import{findScore} from "./score.js";
-import{findNext} from "./next.js";
+import{Update, WriteScore, listNew, writeTest} from "./WriteFile.js"
+import{Next} from "./next.js";
+import {Score} from "./score.js";
+
+
 
 const citiesList = [
     {city: 'paris', score: 2000, distance:{
@@ -48,17 +50,27 @@ const citiesList = [
         }}
 ];
 
-// faire un trajet avec le score max et compter le nombre de kilomètre
-
-const itinerary = R.applySpec({
-    scoreTotal: findScore,
-    kilometer: findDistance,
-    next: findNext
-});
+const findScore = Score(citiesList);
+const findNext = Next(citiesList);
 
 
+const Itinerary  = (from) => findNext(from);
+//writeTest("lyon",R.add(1)(nb)),
+
+const Boucle = (nb) => R.pipe(
+    R.cond([
+        [R.equals(R.add(1)(nb),3), R.always("oui")],
+        [R.T, Boucle(R.add(1)(nb))]
+    ])
+);
+
+Boucle(0)
+
+Update(Itinerary("paris"))
+WriteScore(R.map(findScore,listNew))
 
 
-//console.log(itinerary(citiesList));
 
-// faire un trajet avec toutes les villes en parcourant le moins de kilomètre possible
+
+
+

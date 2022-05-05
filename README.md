@@ -3,10 +3,7 @@
 
 plusieurs types trajet:
 
-1) score max en 10 villes 
-2) min kil pour 10 villes
-3) score max avec min kil en 10 villes
-
+passer par toutes les villes avec un score le plus haut 
 ville départ -> add score -> distance min ->
 next ville -> add score -> distance min -> .... 
 
