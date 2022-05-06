@@ -6,10 +6,6 @@ export const Score = cities => (city) => R.pipe(
     R.path(['score'])
 )(C.citiesList);
 
-export const test = cities => (city) => R.pipe(
-    R.findIndex(R.propEq('lyon', 2)), //=> 1
-)(C.citiesList);
-
 export const Distance = cities => (from, to) => R.pipe(
     R.find(R.propEq('city', from)),
     R.path(['distance', to])
@@ -64,9 +60,28 @@ export const Supprimer_2 = (city, liste) => {
     return R.filter(c => c.city != city, liste)
 }
 
-export const Supprimer = cities => (city) => R.pipe(
-    R.find(R.propEq('city', city)),
-    R.path(['distance']),
-    R.dropWhile('bordeaux')
+export const Supprimer = (city_1, city_2, liste) => {
+    C.citiesList[FindIndexCity(liste)(city_1)] = R.over(R.lensProp('distance'), R.omit([city_2]), C.citiesList[FindIndexCity(liste)(city_1)]);// 0 = paris
+    C.citiesList[FindIndexCity(liste)(city_2)] = R.over(R.lensProp('distance'), R.omit([city_1]), C.citiesList[FindIndexCity(liste)(city_2)]); // 1 = lyon
+    return C.citiesList
+}
+
+export const FindIndexCity = cities => (city) => R.pipe(
+    R.findIndex(R.propEq('city', city))
 )(C.citiesList);
 
+
+/*
+const findMin = R.pipe(
+    R.toPairs,
+    R.sortBy(R.prop(1)),
+    R.take(2),
+    R.map(prep)
+);
+
+const Next = cities => (from) => R.pipe(
+    R.find(R.propEq('city', from)),
+    R.path(['distance']),
+    findMin
+)(cities);
+*/

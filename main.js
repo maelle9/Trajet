@@ -24,25 +24,33 @@ console.log(F.ClassementVilleParDistance('paris'));
 
 console.log(F.VilleLaPlusProche('paris'));
 
-console.log(F.VilleLaPlusProcheExcept('paris', ['lyon']));
 
 
-/*
 // ----------- arbre couvrant test -----------
 
 console.log('--- Arbre couvrant ---'); // PAS FINI
 
 const nomVilleDepart = 'paris'
 
-const arbreCouvrant = [[nomVilleDepart,[F.VilleLaPlusProche(nomVilleDepart),F.VilleLaPlusProche_n2(nomVilleDepart)]]]
+const arbreCouvrant = [{city:nomVilleDepart, child:[F.VilleLaPlusProche(nomVilleDepart)]},
+                        {city:F.VilleLaPlusProche(nomVilleDepart), child:[]}];
+
+console.log(F.Supprimer(nomVilleDepart, F.VilleLaPlusProche(nomVilleDepart), C.citiesList));
 console.log(arbreCouvrant)
 
-//console.log(F.Supprimer(C.citiesList)('paris'));
-let listCityIntermediaire = F.Supprimer(C.citiesList)('paris');
-console.log(listCityIntermediaire)
-//listCityIntermediaire = F.Supprimer('marseille',listCityIntermediaire)
-//console.log(listCityIntermediaire)
+//console.log(R.omit(['lyon', 'valence'], F.s(C.citiesList)('paris')));
 
-//console.log(R.append('tests', arbreCouvrant))
-*/
 
+const findMin = R.pipe(
+    R.toPairs,
+    R.sortBy(R.prop(1)),
+    R.take(2),
+    R.map(prep)
+);
+
+const Next = cities => (from) => R.pipe(
+    R.find(R.propEq('city', from)),
+    R.path(['distance']),
+    findMin
+)(C.citiesList);
+console.log(Next('paris'))
