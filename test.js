@@ -1,7 +1,8 @@
 import * as R from "ramda";
-import{Update, WriteScore, listNew, writeTest} from "./WriteFile.js"
+import{Update, WriteScore, listNew, writeTest, writeTest2} from "./WriteFile.js"
 import{Next} from "./next.js";
 import {Score} from "./score.js";
+import {forEach} from "ramda";
 
 
 
@@ -55,16 +56,10 @@ const findNext = Next(citiesList);
 
 
 const Itinerary  = (from) => findNext(from);
-//writeTest("lyon",R.add(1)(nb)),
 
-const Boucle = (nb) => R.pipe(
-    R.cond([
-        [R.equals(R.add(1)(nb),3), R.always("oui")],
-        [R.T, Boucle(R.add(1)(nb))]
-    ])
-);
+R.forEach(R.pipe(writeTest, writeTest2),[1,2,3,4,5]);
 
-Boucle(0)
+
 
 Update(Itinerary("paris"))
 WriteScore(R.map(findScore,listNew))
