@@ -18,6 +18,8 @@ export const citiesList =[
     {from: 'marseille', to:'brest', km:1280}
 ];
 
+/// ========== Test/echec ===========
+
 export const citiesList_3 =[
     {city: 'paris', distance:[
             {nom:'lyon', km:466},
