@@ -1,5 +1,42 @@
+export const citiesList =[
+    {from: 'paris', to:'lyon', km:466},
+    {from: 'paris', to:'marseille', km:773},
+    {from: 'paris', to:'bordeaux', km:583},
+    {from: 'paris', to:'valence', km:563},
+    {from: 'paris', to:'brest', km:591},
 
-export const citiesList = [
+    {from: 'lyon', to:'paris', km:466},
+    {from: 'lyon', to:'marseille', km:315},
+    {from: 'lyon', to:'bordeaux', km:556},
+    {from: 'lyon', to:'valence', km:103},
+    {from: 'lyon', to:'brest', km:971},
+
+    {from: 'marseille', to:'paris', km:773},
+    {from: 'marseille', to:'lyon', km:315},
+    {from: 'marseille', to:'bordeaux', km:645},
+    {from: 'marseille', to:'valence', km:214},
+    {from: 'marseille', to:'brest', km:1280}
+];
+
+export const citiesList_3 =[
+    {city: 'paris', distance:[
+            {nom:'lyon', km:466},
+            {nom:'marseille', km:773},
+            {nom:'bordeaux', km:583},
+            {nom:'valence', km:563},
+            {nom:'brest', km:591}]
+    },
+    {city: 'marseille', distance:[
+            {nom:'paris', km:773},
+            {nom:'lyon', km:315},
+            {nom:'bordeaux', km:645},
+            {nom:'valence', km:214},
+            {nom:'brest', km:1280}]
+    },
+];
+
+
+export const citiesList_2 = [
     {city: 'paris', score: 2000, distance:{
             lyon:466,
             marseille:773,

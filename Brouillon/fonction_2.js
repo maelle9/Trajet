@@ -1,5 +1,5 @@
 import * as R from "ramda";
-import * as F from "./fonctions.js";
+import * as F from "../fonctions.js";
 
 const Arbre = [
     {'0':{city: 'paris', score: 0, kilometer:0, child:[1,2]}},
