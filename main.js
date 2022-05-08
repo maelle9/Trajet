@@ -8,31 +8,47 @@ const nomVilleDepart = 'paris'
 
 // ----------- arbre couvrant construction ----------- // PAS FINI
 
-console.log('--- Arbre couvrant ---');
-
 const nombreDeVille = R.length(F.SelectOneCity(C.citiesList)('paris'));
 
-const city_1 = nomVilleDepart;
-const city_2 = F.VilleLaPlusProche(C.citiesList)(city_1,C.citiesList)
-
+//
 let arbreCouvrant = [];
 let citiesList = C.citiesList;
 
+// Initialisation
+let city_1 = nomVilleDepart;
+let city_2 = F.VilleLaPlusProche(C.citiesList)(city_1,C.citiesList)
+
+// Ligne 1 - init -------------------
 arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(city_1);
-
 arbreCouvrant = F.AddNewChildInArbreCouvrant(city_1, city_2, arbreCouvrant);
-
-arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(city_2);
 
 citiesList = F.Delete(citiesList)(city_1, city_2);
 
-const ListNameCityInArbreCouvrant = F.GetNameCityInArbreCouvrant(arbreCouvrant)();
-const nextCityToPutInTree = F.SelectBestOption(F.ListBestOption (ListNameCityInArbreCouvrant, citiesList))();
+// Ligne 2 -------------------
+city_1 = city_2;
+let ListNameCityInArbreCouvrant = F.GetNameCityInArbreCouvrant(arbreCouvrant)();
+let nextCityToPutInTree = F.SelectBestOption(F.ListBestOption (ListNameCityInArbreCouvrant, citiesList))();
+city_2 = nextCityToPutInTree;
 
-arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(nextCityToPutInTree);
+arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(city_1);
+arbreCouvrant = F.AddNewChildInArbreCouvrant(city_1, city_2, arbreCouvrant);
 
-console.log(F.AddNewChildInArbreCouvrant('lyon', nextCityToPutInTree, arbreCouvrant))
-//console.log(newCitiesList)
+citiesList = F.Delete(citiesList)(city_1, city_2);
+
+// Ligne 3 -------------------
+city_1 = city_2;
+ListNameCityInArbreCouvrant = F.GetNameCityInArbreCouvrant(arbreCouvrant)();
+nextCityToPutInTree = F.SelectBestOption(F.ListBestOption (ListNameCityInArbreCouvrant, citiesList))();
+city_2 = nextCityToPutInTree;
+
+arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(city_1);
+arbreCouvrant = F.AddNewChildInArbreCouvrant(city_1, city_2, arbreCouvrant);
+
+citiesList = F.Delete(citiesList)(city_1, city_2);
+
+
+// Print -------------------
+console.log(arbreCouvrant)
 
 
 /*
@@ -50,20 +66,3 @@ console.log(GetNameCityInArbreCouvrant(arbreCouvrant)());
 
 //console.log(F.AddNewCityInArbreCouvrant(arbreCouvrant_initialisation)('paris','lyon'));
  */
-
-
-// ----------- Brouillon -----------
-/*
-let v1, v2;
-for (let i = 0 ; i < nombreDeVille -1 ; i++){
-
-    //F.DisplayListDistanceMin(newCitiesList,arbreCouvrant, nomVilleDepart);
-    v1 = test(F.DisplayListDistanceMin(newCitiesList,arbreCouvrant, nomVilleDepart));
-    console.log(v1);
-    v2 = F.VilleLaPlusProche(newCitiesList)(nomVilleDepart,newCitiesList);
-    arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(v1,v2);
-
-    newCitiesList = F.Delete(newCitiesList)(v1, v2);
-}
-console.log(arbreCouvrant)
-*/

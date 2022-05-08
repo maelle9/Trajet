@@ -15,70 +15,23 @@ export const citiesList =[
     {from: 'marseille', to:'lyon', km:315},
     {from: 'marseille', to:'bordeaux', km:645},
     {from: 'marseille', to:'valence', km:214},
-    {from: 'marseille', to:'brest', km:1280}
-];
+    {from: 'marseille', to:'brest', km:1280},
 
-/// ========== Test/echec ===========
+    {from: 'bordeaux', to:'paris', km:583},
+    {from: 'bordeaux', to:'lyon', km:556},
+    {from: 'bordeaux', to:'marseille', km:645},
+    {from: 'bordeaux', to:'valence', km:652},
+    {from: 'bordeaux', to:'brest', km:652},
 
-export const citiesList_3 =[
-    {city: 'paris', distance:[
-            {nom:'lyon', km:466},
-            {nom:'marseille', km:773},
-            {nom:'bordeaux', km:583},
-            {nom:'valence', km:563},
-            {nom:'brest', km:591}]
-    },
-    {city: 'marseille', distance:[
-            {nom:'paris', km:773},
-            {nom:'lyon', km:315},
-            {nom:'bordeaux', km:645},
-            {nom:'valence', km:214},
-            {nom:'brest', km:1280}]
-    },
-];
+    {from: 'valence', to:'paris', km:563},
+    {from: 'valence', to:'lyon', km:103},
+    {from: 'valence', to:'marseille', km:214},
+    {from: 'valence', to:'bordeaux', km:652},
+    {from: 'valence', to:'brest', km:1068},
 
-
-export const citiesList_2 = [
-    {city: 'paris', score: 2000, distance:{
-            lyon:466,
-            marseille:773,
-            bordeaux:583,
-            valence:563,
-            brest:591
-        }},
-    {city: 'lyon', score: 1000, distance:{
-            paris:466,
-            marseille:315,
-            bordeaux:556,
-            valence:103,
-            brest:971
-        }},
-    {city: 'marseille', score: 600, distance:{
-            paris:773,
-            lyon: 315,
-            bordeaux:645,
-            valence:214,
-            brest:1280
-        }},
-    {city: 'bordeaux', score: 300, distance:{
-            paris:583,
-            lyon:556,
-            marseille:645,
-            valence:652,
-            brest:652
-        }},
-    {city: 'valence', score: 500, distance:{
-            paris:563,
-            lyon:103,
-            marseille:214,
-            bordeaux:652,
-            brest:1068
-        }},
-    {city: 'brest', score: 100, distance:{
-            paris:591,
-            lyon:971,
-            marseille:1280,
-            bordeaux:652,
-            valence:1068
-        }}
+    {from: 'brest', to:'paris', km:591},
+    {from: 'brest', to:'lyon', km:971},
+    {from: 'brest', to:'marseille', km:1280},
+    {from: 'brest', to:'bordeaux', km:652},
+    {from: 'brest', to:'valence', km:1068},
 ];
