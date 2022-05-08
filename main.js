@@ -2,7 +2,42 @@ import * as R from "ramda";
 import * as F from "./fonctions.js";
 import * as C from "./cities.js";
 
+
+const nomVilleDepart = 'paris'
+
+
+// ----------- arbre couvrant construction ----------- // PAS FINI
+
+console.log('--- Arbre couvrant ---');
+
+const nombreDeVille = R.length(F.SelectOneCity(C.citiesList)('paris'));
+
+const city_1 = nomVilleDepart;
+const city_2 = F.VilleLaPlusProche(C.citiesList)(city_1,C.citiesList)
+
+let arbreCouvrant = [];
+let citiesList = C.citiesList;
+
+arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(city_1);
+
+arbreCouvrant = F.AddNewChildInArbreCouvrant(city_1, city_2, arbreCouvrant);
+
+arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(city_2);
+
+citiesList = F.Delete(citiesList)(city_1, city_2);
+
+const ListNameCityInArbreCouvrant = F.GetNameCityInArbreCouvrant(arbreCouvrant)();
+const nextCityToPutInTree = F.SelectBestOption(F.ListBestOption (ListNameCityInArbreCouvrant, citiesList))();
+
+arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(nextCityToPutInTree);
+
+console.log(F.AddNewChildInArbreCouvrant('lyon', nextCityToPutInTree, arbreCouvrant))
+//console.log(newCitiesList)
+
+
 /*
+// ----------- Comment utiliser les fonctions créées -----------
+
 console.log(F.Distance(C.citiesList)('paris','marseille'));
 
 console.log(F.SelectOneCity(C.citiesList)('paris'));
@@ -17,47 +52,9 @@ console.log(GetNameCityInArbreCouvrant(arbreCouvrant)());
  */
 
 
-
-// ----------- arbre couvrant construction ----------- // PAS FINI
-
-console.log('--- Arbre couvrant ---');
-
-const nombreDeVille = R.length(F.SelectOneCity(C.citiesList)('paris'));
-
-const nomVilleDepart = 'paris'
-
-//let arbreCouvrant = F.AddNewCityInArbreCouvrant([])(nomVilleDepart,F.VilleLaPlusProche(C.citiesList)(nomVilleDepart,C.citiesList));
-let arbreCouvrant = [
-    { city: 'paris', child: [ 'lyon' ] },
-    { city: 'lyon', child: [] },];
-
-//let newCitiesList = F.Delete(C.citiesList)(nomVilleDepart, F.VilleLaPlusProche(C.citiesList)(nomVilleDepart,C.citiesList));
-let newCitiesList = F.Delete(C.citiesList)('paris', 'lyon');
-
-
-const ListNameCityInArbreCouvrant = F.GetNameCityInArbreCouvrant(arbreCouvrant)();
-console.log(ListNameCityInArbreCouvrant)
-
-
-const nextCityToPutInTree = F.SelectBestOption(F.ListBestOption (ListNameCityInArbreCouvrant, newCitiesList))();
-
-console.log(nextCityToPutInTree)
-
-
-
-
-//console.log(arbreCouvrant)
-//console.log(newCitiesList)
-
-let v1, v2;
-
-
+// ----------- Brouillon -----------
 /*
-const test = (list) =>
-    R.pipe(
-        R.sort(),
-        R.head()
-    );
+let v1, v2;
 for (let i = 0 ; i < nombreDeVille -1 ; i++){
 
     //F.DisplayListDistanceMin(newCitiesList,arbreCouvrant, nomVilleDepart);

@@ -2,7 +2,7 @@ import * as R from "ramda";
 import * as C from "./cities.js";
 
 // ====================================================================
-//                  Fonctions de base
+//              Fonctions de base
 // ====================================================================
 
 // Permet de trouver la distance en km entre 2 villes données
@@ -34,8 +34,10 @@ export const DistanceVilleLaPlusProche = citiesList => (from) => R.pipe(
 
 // Supprime le trajet entre 2 villes de citiesList pour ne pas le refaire
 export const Delete = citiesList => (city_1, city_2) => R.pipe(
-    R.reject (R.where ({from: R.includes (city_1), to: R.includes (city_2)})),
-    R.reject (R.where ({from: R.includes (city_2), to: R.includes (city_1)}))
+    R.reject (R.where ({from: R.includes (city_1),
+                        to: R.includes (city_2)})),
+    R.reject (R.where ({from: R.includes (city_2),
+                        to: R.includes (city_1)}))
 )(citiesList);
 
 
@@ -46,7 +48,9 @@ export const Delete = citiesList => (city_1, city_2) => R.pipe(
 export const ListBestOption = (items, newCitiesList) => {
     const copyItems = [];
     R.forEach((item) => {
-        copyItems.push({from : item, to : VilleLaPlusProche(newCitiesList)(item), km : DistanceVilleLaPlusProche(newCitiesList)(item)});
+        copyItems.push({from : item,
+                        to : VilleLaPlusProche(newCitiesList)(item),
+                        km : DistanceVilleLaPlusProche(newCitiesList)(item)});
     })(items);
     return copyItems
 }
@@ -61,11 +65,18 @@ export const GetNameCityInArbreCouvrant = arbreCouvrant => () => R.pipe(
 )(arbreCouvrant);
 
 // ====================================================================
-//      Fonctions pour l'arbre couvrant
+//              Fonctions pour l'arbre couvrant
 // ====================================================================
 
-// Ajoute une nouvelle ville et son enfant dans l'arbre couvrant
-export const AddNewCityInArbreCouvrant = arbreCouvrant => (city, nameChild) => R.pipe(
-    R.append({city :city, child:[nameChild]})
+export const AddNewCityInArbreCouvrant = arbreCouvrant => (cityParent) => R.pipe(
+    R.append({city :cityParent, child:[]})
 )(arbreCouvrant);
+
+export const AddNewChildInArbreCouvrant = (cityParent, cityChild, arbreCouvrant) => {
+    const index = R.pipe(
+        R.findIndex(R.propEq('city', cityParent))
+    )(arbreCouvrant);
+    arbreCouvrant[index] = R.modify('child', R.append(cityChild), arbreCouvrant[index])
+    return arbreCouvrant
+}
 
