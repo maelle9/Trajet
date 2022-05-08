@@ -1,9 +1,10 @@
 import * as R from "ramda";
 import * as F from "./fonctions.js";
 import * as C from "./cities.js";
+import {arbreCouvrantTransformInPath} from "./fonctions.js";
 
 
-const nomVilleDepart = 'paris'
+const nomVilleDepart = 'marseille'
 
 
 // ----------- arbre couvrant construction ----------- // PAS FINI
@@ -17,40 +18,37 @@ let citiesList = C.citiesList;
 // Initialisation
 let city_1 = nomVilleDepart;
 let city_2 = F.VilleLaPlusProche(C.citiesList)(city_1,C.citiesList)
+let city_2_parent;
+
+let ListNameCityInArbreCouvrant;
+
 
 // Ligne 1 - init -------------------
 arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(city_1);
 arbreCouvrant = F.AddNewChildInArbreCouvrant(city_1, city_2, arbreCouvrant);
 
 citiesList = F.Delete(citiesList)(city_1, city_2);
+citiesList = F.DeleteInit(citiesList)(city_1);
 
-// Ligne 2 -------------------
-city_1 = city_2;
-let ListNameCityInArbreCouvrant = F.GetNameCityInArbreCouvrant(arbreCouvrant)();
-let nextCityToPutInTree = F.SelectBestOption(F.ListBestOption (ListNameCityInArbreCouvrant, citiesList))();
-city_2 = nextCityToPutInTree;
+// Boucle -------------------
+for (let i = 0 ; i < nombreDeVille ; i++){
+    city_1 = city_2;
+    arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(city_1);
 
-arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(city_1);
-arbreCouvrant = F.AddNewChildInArbreCouvrant(city_1, city_2, arbreCouvrant);
+    ListNameCityInArbreCouvrant = F.GetNameCityInArbreCouvrant(arbreCouvrant)();
+    city_2 = F.SelectBestOption_child(F.ListBestOption (ListNameCityInArbreCouvrant, citiesList))();
+    city_2_parent = F.SelectBestOption_parent(F.ListBestOption (ListNameCityInArbreCouvrant, citiesList))();
 
-citiesList = F.Delete(citiesList)(city_1, city_2);
+    arbreCouvrant = F.AddNewChildInArbreCouvrant(city_2_parent, city_2, arbreCouvrant);
 
-// Ligne 3 -------------------
-city_1 = city_2;
-ListNameCityInArbreCouvrant = F.GetNameCityInArbreCouvrant(arbreCouvrant)();
-nextCityToPutInTree = F.SelectBestOption(F.ListBestOption (ListNameCityInArbreCouvrant, citiesList))();
-city_2 = nextCityToPutInTree;
-
-arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(city_1);
-arbreCouvrant = F.AddNewChildInArbreCouvrant(city_1, city_2, arbreCouvrant);
-
-citiesList = F.Delete(citiesList)(city_1, city_2);
-
+    citiesList = F.Delete(citiesList)(city_1, city_2);
+}
 
 // Print -------------------
-console.log(arbreCouvrant)
+console.log(arbreCouvrant);
 
 
+console.log(F.arbreCouvrantTransformInPath(arbreCouvrant));
 /*
 // ----------- Comment utiliser les fonctions créées -----------
 

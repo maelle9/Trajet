@@ -33,13 +33,16 @@ export const DistanceVilleLaPlusProche = citiesList => (from) => R.pipe(
 )(citiesList);
 
 // Supprime le trajet entre 2 villes de citiesList pour ne pas le refaire
+// + supprime les villes ou on est déja passé
 export const Delete = citiesList => (city_1, city_2) => R.pipe(
-    R.reject (R.where ({from: R.includes (city_1),
-                        to: R.includes (city_2)})),
     R.reject (R.where ({from: R.includes (city_2),
-                        to: R.includes (city_1)}))
+                        to: R.includes (city_1)})),
+    R.reject (R.where ({to: R.includes (city_2)}))
 )(citiesList);
 
+export const DeleteInit = citiesList => (cityDepart) => R.pipe(
+    R.reject (R.where ({to: R.includes (cityDepart)})),
+)(citiesList);
 
 // ====================================================================
 //      Détermine la ville suivante à ajouter dans l'arbre couvrant
@@ -54,10 +57,15 @@ export const ListBestOption = (items, newCitiesList) => {
     })(items);
     return copyItems
 }
-export const SelectBestOption = copyItems => () => R.pipe(
+export const SelectBestOption_child = copyItems => () => R.pipe(
     R.sortBy(R.prop('km')),
     R.head(),
     R.path(['to']),
+)(copyItems);
+export const SelectBestOption_parent = copyItems => () => R.pipe(
+    R.sortBy(R.prop('km')),
+    R.head(),
+    R.path(['from']),
 )(copyItems);
 
 export const GetNameCityInArbreCouvrant = arbreCouvrant => () => R.pipe(
@@ -65,7 +73,7 @@ export const GetNameCityInArbreCouvrant = arbreCouvrant => () => R.pipe(
 )(arbreCouvrant);
 
 // ====================================================================
-//              Fonctions pour l'arbre couvrant
+//              Fonctions pour construire l'arbre couvrant
 // ====================================================================
 
 export const AddNewCityInArbreCouvrant = arbreCouvrant => (cityParent) => R.pipe(
@@ -80,3 +88,20 @@ export const AddNewChildInArbreCouvrant = (cityParent, cityChild, arbreCouvrant)
     return arbreCouvrant
 }
 
+// ====================================================================
+//              Extraction chemin
+// ====================================================================
+
+export const arbreCouvrantTransformInPath = (arbre) => {
+    const copyItems = [];
+    R.forEach((item) => {
+        copyItems.push(selectCity(item)());
+    })(arbre);
+    return copyItems
+}
+export const selectCity = item => () => R.pipe(
+    R.path(['city']),
+)(item);
+
+
+//R.tap(x => console.log(x)), // Print et continue
