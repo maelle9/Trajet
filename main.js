@@ -45,10 +45,23 @@ for (let i = 0 ; i < nombreDeVille ; i++){
 }
 
 // Print -------------------
-console.log(arbreCouvrant);
 
+const pathCities = F.arbreCouvrantTransformInPath(arbreCouvrant);
 
-console.log(F.arbreCouvrantTransformInPath(arbreCouvrant));
+const distance = R.pipe(
+    R.aperture(2),
+    R.map(F.Distance(C.citiesList)),
+    R.sum
+);
+
+const kilometer = R.converge(R.add,[R.pipe(R.remove(1,4),F.Distance(C.citiesList)),distance]);
+
+const bestItinerary = F.arbreCouvrantTransformInPath(arbreCouvrant);
+const Sumkilometer = kilometer(pathCities);
+
+console.log(bestItinerary);
+console.log(Sumkilometer);
+
 /*
 // ----------- Comment utiliser les fonctions créées -----------
 

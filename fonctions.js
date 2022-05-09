@@ -6,9 +6,9 @@ import * as C from "./cities.js";
 // ====================================================================
 
 // Permet de trouver la distance en km entre 2 villes données
-export const Distance = citiesList => (from, to) => R.pipe(
-    R.filter(R.propEq('from', from)),
-    R.find(R.propEq('to', to)),
+export const Distance = citiesList => (dist) => R.pipe(
+    R.filter(R.propEq('from',dist[0])),
+    R.find(R.propEq('to',dist[1])),
     R.path(['km']),
 )(citiesList);
 
