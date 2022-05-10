@@ -35,7 +35,7 @@ console.log(getVille(distance[R.findIndex(R.propEq('city', 'Paris'))(City_2)]))
 
 
 
-/// ========== Test/echec ===========
+/// ========== test/echec ===========
 
 export const citiesList_3 =[
     {city: 'paris', distance:[
