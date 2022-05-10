@@ -1,4 +1,20 @@
-#<div style="text-align: right;"><font size='2px'> Sonia Moghraoui, Camille Bayon De Noyer, Maëlle Marcelin </font></div>
-#<center><font color='red'><hr> Trajet <hr></font></center>
+# Voyageur de Commerce - Projet de javaScript
+Les membres de l'équipe:
+* Camille BAYON DE NOYER, 
+* Sonia MOGHRAOUI, 
+* Maëlle MARCELIN
 
-##Choix 2
+> Notre but : Trouver le trajet le plus optimisé possibible
+
+> Programmation fonctionnelle (librairie Ramda)
+
+## Sommaire
+1. [Méthode utilisée](#methode)
+2. [Démonstration](#demo)
+
+## Méthode utilisée <a name="methode"></a>
+Recherche de la ville la plus proche
+
+## Démonstration <a name="demo"></a>
+### Screenshot
+
