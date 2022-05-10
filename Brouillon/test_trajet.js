@@ -21,7 +21,7 @@ City.sort(function (a, b) {
     return a.score - b.score ;
 });
 var getScore = R.pluck('score');
-console.log(getScore(City))
+//console.log(getScore(City))
 
 
 
@@ -30,7 +30,7 @@ var getDistance = R.pluck('distance');
 var distance = getDistance(City_2)
 var getVille = R.pluck('Valence');
 
-console.log(getVille(distance[R.findIndex(R.propEq('city', 'Paris'))(City_2)]))
+//console.log(getVille(distance[R.findIndex(R.propEq('city', 'Paris'))(City_2)]))
 
 
 

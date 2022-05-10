@@ -2,51 +2,92 @@ import * as R from "ramda";
 import * as F from "./fonctions.js";
 import * as C from "./cities.js";
 import {arbreCouvrantTransformInPath} from "./fonctions.js";
-
-
-const nomVilleDepart = 'marseille'
+import {citiesList_2} from "./Brouillon/test_trajet.js";
 
 
 // ----------- arbre couvrant construction ----------- // PAS FINI
 
 const nombreDeVille = R.length(F.SelectOneCity(C.citiesList)('paris'));
 
-//
-let arbreCouvrant = [];
-let citiesList = C.citiesList;
 
 // Initialisation
-let city_1 = nomVilleDepart;
-let city_2 = F.VilleLaPlusProche(C.citiesList)(city_1,C.citiesList)
-let city_2_parent;
+const city = {
+    city_1: "",
+    city_2:""};
 
-let ListNameCityInArbreCouvrant;
+
+// def des fonctions
+const xLens = R.lensProp('city_1');
+const yLens = R.lensProp('city_2');
+
+const SearchCity1 = (city) => R.path(['city_1'],city);
+const SearchCity2 = (city) => R.path(['city_2'],city);
+const NearestCity =  F.VilleLaPlusProche(C.citiesList);
+
 
 
 // Ligne 1 - init -------------------
-arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(city_1);
-arbreCouvrant = F.AddNewChildInArbreCouvrant(city_1, city_2, arbreCouvrant);
 
-citiesList = F.Delete(citiesList)(city_1, city_2);
-citiesList = F.DeleteInit(citiesList)(city_1);
+const SetParameter = city => R.pipe(
+    R.set(xLens,"marseille"),
+    R.converge(R.set(yLens),[R.pipe(SearchCity1,NearestCity),R.identity])
+)(city);
+
+const initArbre = R.pipe(SearchCity1,F.AddNewCityInArbreCouvrant([]));
+
+const initCity = city => R.pipe(
+    R.converge(F.Delete(C.citiesList),[SearchCity1,SearchCity2])
+)(city);
+
+const StartInit = city => (citiesList) => R.pipe(
+    R.converge(F.DeleteInit(citiesList),[SearchCity1,R.identity])
+)(city);
+
+const NewCitiesList = initCity(SetParameter(city));
+const NewCitiesList2 = StartInit(SetParameter(city))(NewCitiesList);
+
+const NewArbreCouvrant = initArbre(SetParameter(city));
+
+const NewCity = SetParameter(city);
 
 // Boucle -------------------
-for (let i = 0 ; i < nombreDeVille ; i++){
-    city_1 = city_2;
-    arbreCouvrant = F.AddNewCityInArbreCouvrant(arbreCouvrant)(city_1);
 
-    ListNameCityInArbreCouvrant = F.GetNameCityInArbreCouvrant(arbreCouvrant)();
-    city_2 = F.SelectBestOption_child(F.ListBestOption (ListNameCityInArbreCouvrant, citiesList))();
-    city_2_parent = F.SelectBestOption_parent(F.ListBestOption (ListNameCityInArbreCouvrant, citiesList))();
+const ArbreConstruction = (city,NewArbreCouvrant) => R.pipe(
+    SearchCity1(city),
+    F.AddNewCityInArbreCouvrant(NewArbreCouvrant)
+);
 
-    arbreCouvrant = F.AddNewChildInArbreCouvrant(city_2_parent, city_2, arbreCouvrant);
+const SetCity2 = (NewArbreCouvrant,NewCitiesList) => R.pipe(
+    R.pluck('city',NewArbreCouvrant),
+    F.ListBestOption(NewCitiesList,R.__),
+    F.SelectBestOption_child,
+);
 
-    citiesList = F.Delete(citiesList)(city_1, city_2);
+
+const Update = city => (NewArbreCouvrant,NewCitiesList) => R.pipe(
+    R.converge(R.set(xLens),[SearchCity2,R.identity]),
+    R.applySpec({
+        arbre : ArbreConstruction(R.__,NewArbreCouvrant),
+        city : R.converge(R.set(yLens),[R.pipe(ArbreConstruction(R.__,NewArbreCouvrant),SetCity2(R.__,NewCitiesList)),R.identity]),
+        newCitiesList : R.pipe(R.converge(R.set(yLens),[R.pipe(ArbreConstruction(R.__,NewArbreCouvrant),SetCity2(R.__,NewCitiesList)),R.identity]),R.converge(F.Delete(NewCitiesList),[SearchCity1,SearchCity2]))
+    })
+)(city);
+
+const GetArbre = R.path(["arbre"]);
+const GetCity = R.path(["city"]);
+const GetCitiesList = R.path(["newCitiesList"]);
+
+const Boucle = (NewArbreCouvrant,NewCitiesList,city) => {
+    if ( (R.gt(R.length(NewArbreCouvrant),nombreDeVille)) == false){
+        return Boucle(GetArbre(Update(city)(NewArbreCouvrant,NewCitiesList)),GetCitiesList(Update(city)(NewArbreCouvrant,NewCitiesList)),GetCity(Update(city)(NewArbreCouvrant,NewCitiesList)));
+    }
+
+    return NewArbreCouvrant;
 }
 
-// Print -------------------
+// Distance -------------------
 
-const pathCities = F.arbreCouvrantTransformInPath(arbreCouvrant);
+const pathCities = F.arbreCouvrantTransformInPath(Boucle(NewArbreCouvrant,NewCitiesList2,NewCity));
 
 const distance = R.pipe(
     R.aperture(2),
@@ -56,11 +97,10 @@ const distance = R.pipe(
 
 const kilometer = R.converge(R.add,[R.pipe(R.remove(1,4),F.Distance(C.citiesList)),distance]);
 
-const bestItinerary = F.arbreCouvrantTransformInPath(arbreCouvrant);
-const Sumkilometer = kilometer(pathCities);
+console.log(pathCities);
+console.log(kilometer(pathCities));
 
-console.log(bestItinerary);
-console.log(Sumkilometer);
+
 
 /*
 // ----------- Comment utiliser les fonctions créées -----------
