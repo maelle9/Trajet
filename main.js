@@ -107,12 +107,19 @@ const pathCities = F.arbreCouvrantTransformInPath(
 const distance = R.pipe(R.aperture(2), R.map(F.Distance(C.citiesList)), R.sum);
 
 const kilometer = R.converge(R.add, [
-  R.pipe(R.remove(1, 4), F.Distance(C.citiesList)),
+  R.pipe(
+    R.converge(R.remove(1), [
+      R.pipe(R.length, R.subtract(R.__, 2)),
+      R.identity,
+    ]),
+    F.Distance(C.citiesList)
+  ),
   distance,
 ]);
 
-console.log(pathCities);
-console.log(kilometer(pathCities));
+//console.log(pathCities);
+//console.log(kilometer(pathCities));
+console.log(kilometer(["marseille", "valence", "lyon"]));
 
 //test de gulp
 
@@ -131,3 +138,6 @@ console.log(GetNameCityInArbreCouvrant(arbreCouvrant)());
 
 //console.log(F.AddNewCityInArbreCouvrant(arbreCouvrant_initialisation)('paris','lyon'));
  */
+
+// test pour Sonia
+//test
