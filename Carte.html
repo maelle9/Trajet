@@ -2,13 +2,16 @@
 <!--Interface sans la carte-->
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <title>Page Title</title>
+    <title>Voyageur de commerce</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src='https://cdn.plot.ly/plotly-2.12.1.min.js'></script>
+
 
     <style>
+
         p
         {
             margin:0;
@@ -124,7 +127,9 @@
             }
         }
     </style>
+
 </head>
+
 <body>
 
 <div class="header">
@@ -133,30 +138,35 @@
 </div>
 
 <div class="navbar">
-    <a href="#">Link</a>
-    <a href="#" class="right">Link</a>
+    <a href="https://github.com/maaelle/Trajet">GitHub</a>
+    <a href="https://github.com/maaelle/Trajet" class="right">GitHub</a>
 </div>
 
 <div class="row">
     <div class="side">
         <h2>A propos de nous</h2>
-        <p>Nous sommes 3 élèves Bac +4 en école d'ingénieurs, dans le parcours Intelligence Artificielle</p>
+        <p>Nous sommes 3 élèves Bac +4 en école d'ingénieurs, dans le parcours Intelligence Artificielle.</p>
+        <br/>
+        <p style = "text-align: center">
+            Camille BAYON DE NOYER
+        <br/>
+            Maelle MARCELIN
+        <br/>
+            Sonia MOGHRAOUI
+        </p>
         <h3>A propos de notre projet</h3>
         <p>Notre projet reprends l'enigme du voyageur de commerce. </p>
-        <p>Chaque ville a un score et un camion peut avoir plusieurs contraintes. </p>
-        <p>Nous devons, à l'aide du langage JavaScript, laisser un utilisateur choisir un point A et un point B. </p>
-        <p>Le but est ensuite de donner à l'utilisateur le chemin le plus optimisé, que se soit en temps, en distance ou en score.</p>
-        <p>Grace à l'API google, si l'utilisateur entre une ville qui n'existe pas dans la base de donnée, on va lui demander de lui donner un score, puis l'enregistrer</p>
+        <p>Le but est de donner à l'utilisateur le chemin le plus court en passant par toutes les villes données.</p>
         <div class="fakeimg" style="height:60px;margin-top: 50px">Image</div><br>
 
     </div>
     <div class="main">
-        <h2>Carte</h2>
-        <h5>Date de rendu - 14 mai 2022.</h5>
-        <h5>La carte ne s'affiche pas correctement car il faut lié une carte bancaire à la clé API</h5>
-        <div class="fakeimg" style="height:250px; text-align: center">Carte</div><br>
-
+        <h1 style="text-align: center">Chemin le plus court</h1>
+        <h5 style="text-align: center">Date de rendu - 14 mai 2022.</h5>
+        <div id="myDiv" style="height: 600px;">
+                                    <script type="text/javascript" src='Carte.js'></script></div>
     </div>
+
 </div>
 
 <div style="height:50px; overflow: hidden; background-color: #333;">
