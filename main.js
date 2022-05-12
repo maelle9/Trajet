@@ -117,9 +117,8 @@ const kilometer = R.converge(R.add, [
   distance,
 ]);
 
-//console.log(pathCities);
-//console.log(kilometer(pathCities));
-console.log(kilometer(["marseille", "valence", "lyon"]));
+console.log(pathCities);
+console.log(kilometer(pathCities));
 
 //test de gulp
 
