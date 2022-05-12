@@ -35,6 +35,8 @@
   },
   "homepage": "https://github.com/maaelle/Trajet#readme",
   "dependencies": {
+    "ds.js": "^0.0.0",
+    "plotly.js-dist": "^2.12.1",
     "ramda": "^0.28.0"
   },
   "devDependencies": {
