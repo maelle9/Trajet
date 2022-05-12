@@ -1,8 +1,6 @@
 import * as R from "ramda";
 import * as F from "./fonctions.js";
 import * as C from "./cities.js";
-import { arbreCouvrantTransformInPath } from "./fonctions.js";
-import { citiesList_2 } from "./Brouillon/test_trajet.js";
 
 // ----------- arbre couvrant construction ----------- // PAS FINI
 
@@ -119,24 +117,3 @@ const kilometer = R.converge(R.add, [
 
 console.log(pathCities);
 console.log(kilometer(pathCities));
-
-//test de gulp
-
-/*
-// ----------- Comment utiliser les fonctions créées -----------
-
-console.log(F.Distance(C.citiesList)('paris','marseille'));
-
-console.log(F.SelectOneCity(C.citiesList)('paris'));
-
-console.log(F.VilleLaPlusProche(C.citiesList)('paris'));
-
-console.log(F.Delete(C.citiesList)('paris','marseille'));
-
-console.log(GetNameCityInArbreCouvrant(arbreCouvrant)());
-
-//console.log(F.AddNewCityInArbreCouvrant(arbreCouvrant_initialisation)('paris','lyon'));
- */
-
-// test pour Sonia
-//test
