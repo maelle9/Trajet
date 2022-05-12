@@ -5,7 +5,7 @@ import * as R from "ramda";
 // ====================================================================
 
 // Permet de trouver la distance en km entre 2 villes données
-export const Distance = (citiesList) => (dist) =>
+const Distance = (citiesList) => (dist) =>
   R.pipe(
     R.filter(R.propEq("from", dist[0])),
     R.find(R.propEq("to", dist[1])),
@@ -13,11 +13,11 @@ export const Distance = (citiesList) => (dist) =>
   )(citiesList);
 
 // Selectionne toutes les possibilités de trajets pour 1 ville donnée
-export const SelectOneCity = (citiesList) => (city) =>
+const SelectOneCity = (citiesList) => (city) =>
   R.pipe(R.filter(R.propEq("from", city)))(citiesList);
 
 // Selectionne la ville la plus proche de la ville choisi
-export const VilleLaPlusProche = (citiesList) => (from) =>
+const VilleLaPlusProche = (citiesList) => (from) =>
   R.pipe(
     R.filter(R.propEq("from", from)),
     R.sortBy(R.prop("km")),
@@ -25,7 +25,7 @@ export const VilleLaPlusProche = (citiesList) => (from) =>
     R.path(["to"])
   )(citiesList);
 
-export const DistanceVilleLaPlusProche = (citiesList) => (from) =>
+const DistanceVilleLaPlusProche_ = (citiesList) => (from) =>
   R.pipe(
     R.filter(R.propEq("from", from)),
     R.sortBy(R.prop("km")),
@@ -35,32 +35,32 @@ export const DistanceVilleLaPlusProche = (citiesList) => (from) =>
 
 // Supprime le trajet entre 2 villes de citiesList pour ne pas le refaire
 // + supprime les villes ou on est déja passé
-export const Delete = (citiesList) => (city_1, city_2) =>
+const Delete = (citiesList) => (city_1, city_2) =>
   R.pipe(
     R.reject(R.where({ from: R.includes(city_2), to: R.includes(city_1) })),
     R.reject(R.where({ to: R.includes(city_2) }))
   )(citiesList);
 
-export const DeleteInit = (citiesList) => (cityDepart) =>
+const DeleteInit = (citiesList) => (cityDepart) =>
   R.pipe(R.reject(R.where({ to: R.includes(cityDepart) })))(citiesList);
 
 // ====================================================================
 //      Détermine la ville suivante à ajouter dans l'arbre couvrant
 // ====================================================================
-const transform = (newCitiesList) =>
+const transform_ = (newCitiesList) =>
   R.pipe(
     R.juxt([
       R.identity,
       VilleLaPlusProche(newCitiesList),
-      DistanceVilleLaPlusProche(newCitiesList),
+      DistanceVilleLaPlusProche_(newCitiesList),
     ]),
     R.zipObj(["from", "to", "km"])
   );
 
-export const ListBestOption = (newCitiesList, items) =>
-  R.pipe(R.map(transform(newCitiesList), items));
+const ListBestOption = (newCitiesList, items) =>
+  R.pipe(R.map(transform_(newCitiesList), items));
 
-export const SelectBestOption_child = R.pipe(
+const SelectBestOption_child = R.pipe(
   R.sortBy(R.prop("km")),
   R.head(),
   R.path(["to"])
@@ -70,22 +70,34 @@ export const SelectBestOption_child = R.pipe(
 //              Fonctions pour construire l'arbre couvrant
 // ====================================================================
 
-export const AddNewCityInArbreCouvrant = (arbreCouvrant) => (cityParent) =>
+const AddNewCityInArbreCouvrant = (arbreCouvrant) => (cityParent) =>
   R.pipe(R.append({ city: cityParent, child: [] }))(arbreCouvrant);
 
 // ====================================================================
 //              Extraction chemin
 // ====================================================================
 
-export const arbreCouvrantTransformInPath = (arbre) => {
+const selectCity = (item) => R.pipe(R.path(["city"]))(item);
+
+const arbreCouvrantTransformInPath = (arbre) => {
   const copyItems = [];
   R.forEach((item) => {
     copyItems.push(selectCity(item));
   })(arbre);
   return copyItems;
 };
-export const selectCity = (item) => R.pipe(R.path(["city"]))(item);
 
+export {
+  Distance,
+  SelectOneCity,
+  VilleLaPlusProche,
+  Delete,
+  DeleteInit,
+  ListBestOption,
+  SelectBestOption_child,
+  AddNewCityInArbreCouvrant,
+  arbreCouvrantTransformInPath,
+};
 /*
 fonction pour possible amélioration
 

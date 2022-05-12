@@ -1,0 +1,46 @@
+{
+  "name": "trajet",
+  "version": "1.0.0",
+  "description": "Programmation fonctionelle Javascript",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node main.js",
+    "code-style": "xo",
+    "test": "mocha --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maaelle/Trajet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "contributors": [
+    {
+      "name": "Maëlle MARCELIN",
+      "email": "maelle.marcelin@esme.fr"
+    },
+    {
+      "name": "Camille BAYON DE NOYER",
+      "email": "camille.bayon-de-noyer@esme.fr"
+    },
+    {
+      "name": "Sonia MOGHRAOUI",
+      "email": "sonia.moghraoui@esme.fr"
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maaelle/Trajet/issues"
+  },
+  "homepage": "https://github.com/maaelle/Trajet#readme",
+  "dependencies": {
+    "ramda": "^0.28.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "gulp": "^4.0.2",
+    "mocha": "^10.0.0",
+    "xo": "^0.48.0"
+  }
+}
