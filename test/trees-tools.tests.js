@@ -23,9 +23,9 @@ describe("fonctions.js", () => {
   });
   describe("#VilleLaPlusProche()", () => {
     it("should return distance (number)", () => {
-      expect(VilleLaPlusProche(citiesList)("paris")).to.be.equal("limoges");
-      expect(VilleLaPlusProche(citiesList)("bordeaux")).to.be.equal("limoges");
-      expect(VilleLaPlusProche(citiesList)("lyon")).to.be.equal("valence");
+      expect(VilleLaPlusProche(citiesList)("rennes")).to.be.equal("nantes");
+      expect(VilleLaPlusProche(citiesList)("bordeaux")).to.be.equal("poitier");
+      expect(VilleLaPlusProche(citiesList)("marseille")).to.be.equal("nice");
     });
   });
   describe("#Delete()", () => {

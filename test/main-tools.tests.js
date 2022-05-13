@@ -20,17 +20,7 @@ describe("main.js", () => {
       ).to.be.not.equal(Number.NaN);
     });
     it("should return the distance of the final path", () => {
-      expect(
-        kilometer([
-          "marseille",
-          "valence",
-          "lyon",
-          "paris",
-          "bordeaux",
-          "brest",
-        ])
-      ).to.be.equal(3298);
-      expect(kilometer(["marseille", "valence", "lyon"])).to.be.equal(632);
+      expect(kilometer(["marseille", "valence", "lyon"])).to.be.equal(556.4535915685626);
     });
   });
 });

@@ -1,6 +1,6 @@
 import * as R from "ramda";
 
-export { Loop, AllCitiesName};
+export { AllCitiesName, Loop, findLong, findLat, AddNewCity, DistanceBetweenTwoCities, citiesList};
 
 const citiesList = [
     {
