@@ -1,4 +1,9 @@
-export const citiesList = [
+import {AllCitiesName, Loop} from "./test_city.js";
+
+
+export const citiesList = Loop(AllCitiesName, []);
+/*
+export const vieilleList = [
   {
     from: "paris",
     to: "lyon",
@@ -504,3 +509,5 @@ export const citiesList = [
     long: "3.0819427",
   }, /////////////////fin clermont-ferrand
 ];
+
+ */
