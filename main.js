@@ -128,4 +128,4 @@ const kilometer = R.converge(R.add, [
 console.log(pathCities);
 console.log(kilometer(pathCities));
 
-export { kilometer };
+export { kilometer, pathCities };

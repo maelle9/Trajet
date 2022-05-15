@@ -10,26 +10,63 @@ Les membres de l'équipe:
 ## Sommaire
 1. [Méthode utilisée](#methode)
 2. [Démonstration](#demo)
-3. [Travail réalisé](#travail)
+3. [Installation](#install)
 4. [Sources](#sources)
 
 ## Méthode utilisée <a name="methode"></a>
+
 Etape 1 : Calculer de la distance entre toutes les villes à partir de leur coordonnées GPS (formule d'haversine)
 
 Etape 2 : Recherche de la ville la plus proche
 
-Etape 3 : Construire le chemin
+Etape 3 : Construction du chemin
 
 Etape 4 : Afficher le chemin dans l'interface
 
-## Démonstration <a name="demo"></a>
-### Screenshot
-![Image text](/asset/git/map.jpg)
-
-## Travail réalisé <a name="travail"></a>
+### Travail réalisé
 * Programmation fonctionnelle (Ramda)
 * Mise en place de tests unitaire (Mocha + Chaijs)
 * gulp + xo
+
+## Démonstration <a name="demo"></a>
+
+### Return
+
+Chemin à parcourir:
+```javascript
+[
+'marseille',  'nice',
+'valence',    'grenoble',
+'lyon',       'clermont-ferrand',
+'dijon',      'orléan',
+'paris',      'rouen',
+'amiens',     'lille',
+'strasbourg', 'rennes',
+'nantes',     'brest',
+'bordeaux',   'poitier',
+'toulouse',   'limoges'
+]
+```
+Distance du trajet
+```javascript
+4088.801645249317
+```
+
+### Screenshot
+
+Réalisation d'une interface graphique et d'une carte
+![Image text](/asset/git/gif_interface_graphique.gif)
+
+## Installation <a name="install"></a>
+* Gulp
+
+  npm install --save-dev gulp
+
+* Pour la carte
+
+  npm install plotly.js-dist
+
+  npm install ds.js
 
 ## Sources <a name="sources"></a>
 

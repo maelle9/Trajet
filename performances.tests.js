@@ -1,16 +1,9 @@
 
-// PAS FINI
-
 import {main} from "mocha/lib/cli/index.js";
 
-var TimeStart = performance.now();
+const TimeStart = performance.now();
 main()
-var TimeEnd = performance.now();
-console.log("Excution time " + (TimeEnd - TimeStart) + " ms");
-
-TimeStart = performance.now();
-main()
-TimeEnd = performance.now();
+const TimeEnd = performance.now();
 console.log("Excution time " + (TimeEnd - TimeStart) + " ms");
 
 
