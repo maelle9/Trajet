@@ -1,10 +1,10 @@
 // ====================================================================
-// Unit Testing file "city.js" et "test_city.js" with Mocha and Chai
+// Unit Testing file "city.js" et "build_city_list.js" with Mocha and Chai
 // ====================================================================
 
 
 import { expect } from "chai";
-import { AddNewCity, findLat,findLong, DistanceBetweenTwoCities, citiesList} from "../test_city.js";
+import { AddNewCity, findLat,findLong, DistanceBetweenTwoCities, citiesList} from "../build_city_list.js";
 import * as R from "ramda";
 import {Delete} from "../fonctions.js";
 

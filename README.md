@@ -30,7 +30,7 @@ Etape 4 : Afficher le chemin dans l'interface
 
 ## Démonstration <a name="demo"></a>
 
-### Return
+### Résultats pour 20 villes
 
 Chemin à parcourir:
 ```javascript
@@ -47,14 +47,19 @@ Chemin à parcourir:
 'toulouse',   'limoges'
 ]
 ```
-Distance du trajet
+Distance du trajet (en km)
 ```javascript
 4088.801645249317
+```
+Performance (temps moyen d'éxécution en ms pour 20 villes)
+```javascript
+57.6
 ```
 
 ### Screenshot
 
-Réalisation d'une interface graphique et d'une carte
+
+### Démonstration Interface graphique
 ![Image text](/asset/git/gif_interface_graphique.gif)
 
 ## Installation <a name="install"></a>

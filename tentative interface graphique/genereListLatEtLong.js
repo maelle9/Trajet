@@ -4,7 +4,7 @@ import {
     citiesList,
     findLat,
     findLong
-} from "../test_city.js";
+} from "../build_city_list.js";
 
 import {
     pathCities

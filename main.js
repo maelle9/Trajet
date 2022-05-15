@@ -12,17 +12,14 @@ import {
 } from "./fonctions.js";
 import * as C from "./cities.js";
 
-// ----------- arbre couvrant construction ----------- // PAS FINI
-
 const nombreDeVille = R.length(SelectOneCity(C.citiesList)("paris"));
 
-// Initialisation
 const city = {
   city_1: "",
   city_2: "",
 };
 
-// def des fonctions
+//------------------- Definition des fonctions -------------------
 const xLens = R.lensProp("city_1");
 const yLens = R.lensProp("city_2");
 
@@ -30,7 +27,7 @@ const SearchCity1 = (city) => R.path(["city_1"], city);
 const SearchCity2 = (city) => R.path(["city_2"], city);
 const NearestCity = VilleLaPlusProche(C.citiesList);
 
-// Ligne 1 - init -------------------
+//------------------- Initialisation chemin -------------------
 
 const SetParameter = (city) =>
   R.pipe(
@@ -53,7 +50,7 @@ const NewArbreCouvrant = initArbre(SetParameter(city));
 
 const NewCity = SetParameter(city);
 
-// Boucle -------------------
+// ------------------- Boucle -------------------
 
 const ArbreConstruction = (city, NewArbreCouvrant) =>
   R.pipe(SearchCity1(city), AddNewCityInArbreCouvrant(NewArbreCouvrant));
@@ -106,7 +103,7 @@ const Boucle = (NewArbreCouvrant, NewCitiesList, city) => {
   return NewArbreCouvrant;
 };
 
-// Distance -------------------
+// ------------------- Distance -------------------
 
 const pathCities = arbreCouvrantTransformInPath(
   Boucle(NewArbreCouvrant, NewCitiesList2, NewCity)
