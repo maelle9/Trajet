@@ -56,23 +56,28 @@ Performance (temps moyen d'éxécution en ms pour 20 villes)
 57.6
 ```
 
-### Screenshot
-
+### Résultats pour divers nombres de ville
+![Image text](/asset/git/maps.jpg)
 
 ### Démonstration Interface graphique
 ![Image text](/asset/git/gif_interface_graphique.gif)
 
 ## Installation <a name="install"></a>
+* Ramda
+```
+  npm install ramda
+```
 * Gulp
-
+```
   npm install --save-dev gulp
-
-* Pour la carte
-
+```
+* Pour la carte (plotly)
+```
   npm install plotly.js-dist
-
+```
+```
   npm install ds.js
-
+```
 ## Sources <a name="sources"></a>
 
 ### Librairies
